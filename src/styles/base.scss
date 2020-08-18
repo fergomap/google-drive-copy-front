@@ -1,0 +1,37 @@
+@import './variables.scss';
+
+.main-content {
+    margin-top: 70px;
+}
+
+input {
+    border-radius: 3px;
+    border: solid 1px lightgray;
+    outline: none;
+    padding: 5px 10px;
+
+    &:focus {
+        border-color: $primary;
+    }
+}
+
+button {
+    border-radius: 3px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    input {
+        border-color: $red;
+    }
+
+    small {
+        color: $red;
+    }
+}

@@ -1,0 +1,26 @@
+@import '../../../../styles/variables.scss';
+
+.user-info-component {
+    padding: 10px 20px;
+    text-align: center;
+    min-width: 200px;
+
+    img {
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    .name {
+        font-size: 1.2rem;
+    }
+
+    button, button:hover {
+        color: $red;
+        border-color: $red;
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "action_success": "Acción realizada correctamente",
+    "loading_error": "Ha ocurrido un error, vuelva a intentarlo más tarde.",
+    "user_info_load_error": "No se ha podido cargar la información del usuario, vuelva a intentarlo más tarde.",
+    "search": "Buscar",
+    "log_out": "Cerrar sesión",
+    "log_in": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "required_field": "Campo requerido",
+    "invalid_email": "Email incorrecto"
+}

@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.log-in-component {
+    background-image: linear-gradient($primary, $primary-light);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        text-align: center;
+    }
+
+    .card {
+        align-items: center;
+        min-width: 30%;
+    }
+}

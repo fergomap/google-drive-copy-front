@@ -1,0 +1,12 @@
+{
+    "action_success": "Action success",
+    "loading_error": "An error happened, try again later.",
+    "user_info_load_error": "The user info could not be loaded, try again later.",
+    "search": "Search",
+    "log_out": "Log out",
+    "log_in": "Log in",
+    "email": "Email",
+    "password": "Password",
+    "required_field": "Required field",
+    "invalid_email": "Invalid email"
+}
