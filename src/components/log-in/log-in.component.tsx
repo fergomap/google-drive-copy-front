@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useState } from 'react';
 import './log-in.component.scss';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { SHOW_LOADING_ACTION, HIDE_LOADING_ACTION } from 'store/loading/actions';
 import { logIn } from 'services/auth.service';
 import User from 'model/user';
+import { Link } from 'react-router-dom';
+import { APP_CONSTANTS } from 'config/app.config';
 
 interface LogInFormData {
     email: string;
@@ -16,18 +18,18 @@ interface LogInFormData {
 const LogInComponent: FunctionComponent = (): ReactElement => {
     const dispatch = useDispatch();
     const { register, handleSubmit, errors } = useForm<LogInFormData>();
+    const [ generalError, setGeneralError ] = useState<string>('');
 
     const onSubmit = (formData: LogInFormData): void => {
         dispatch(SHOW_LOADING_ACTION);
 
         logIn(formData.email, formData.password)
             .then((newUser: User) => {
-                localStorage.drive_copy_token = newUser.token;
                 const logInAction = {...LOG_IN_ACTION};
                 logInAction.user = newUser;
                 dispatch(logInAction);
             })
-            .catch()
+            .catch(err => setGeneralError(err.response.data.error))
             .finally(() => dispatch(HIDE_LOADING_ACTION));
     };
 
@@ -55,9 +57,15 @@ const LogInComponent: FunctionComponent = (): ReactElement => {
                     <button type="submit" className="btn btn-primary btn-block">
                         <FormattedMessage id="log_in"/>
                     </button>
+                    <Link to={APP_CONSTANTS.ROUTES.SIGN_UP}>
+                        <FormattedMessage id="create_account"/>
+                    </Link>
                 </form>
             </div>
         </div>
+        { generalError && <div className="alert alert-danger" role="alert">
+            <FormattedMessage id={generalError} />
+        </div> }
     </div>;
 }
 

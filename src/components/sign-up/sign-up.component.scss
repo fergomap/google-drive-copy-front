@@ -1,8 +1,8 @@
 @import '../../styles/variables.scss';
 
-.log-in-component {
+.sign-up-component {
     background-image: linear-gradient($primary, $primary-light);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;

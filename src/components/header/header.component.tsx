@@ -14,7 +14,7 @@ const HeaderComponent: FunctionComponent = (): ReactElement => {
         <img src={process.env.PUBLIC_URL + 'drive.png'} alt="logo"/>
         <input placeholder={formatMessage({ id: 'search' })} />
         <Tooltip placement="bottom" trigger={['click']} overlay={<UserInfoComponent/>}>
-            <img className="avatar" src={user.avatar} alt="avatar"/>
+            <div className="avatar" style={{ background: `url(${user.avatar}) 50% 50% no-repeat` }} />
         </Tooltip>
     </div>;
 }

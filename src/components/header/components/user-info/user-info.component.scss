@@ -2,16 +2,20 @@
 
 .user-info-component {
     padding: 10px 20px;
-    text-align: center;
+    display: flex;
     min-width: 200px;
+    flex-direction: column;
+    align-items: center;
 
-    img {
+    .avatar {
+        height: 100px;
         width: 100px;
         border-radius: 50%;
     }
 
     p {
-        margin: 5px 0;
+        margin-top: 5px;
+        margin-bottom: 0;
     }
 
     .name {
@@ -21,6 +25,6 @@
     button, button:hover {
         color: $red;
         border-color: $red;
-        margin-top: 20px;
+        margin-top: 12px;
     }
 }

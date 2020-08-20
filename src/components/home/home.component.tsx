@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 
 const HomeComponent: FunctionComponent = (): ReactElement => {
-    return <div className="main-content">
+    return <div>
         HOME
     </div>;
 }

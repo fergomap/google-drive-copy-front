@@ -1,9 +1,5 @@
 @import './variables.scss';
 
-.main-content {
-    margin-top: 70px;
-}
-
 input {
     border-radius: 3px;
     border: solid 1px lightgray;
@@ -24,6 +20,11 @@ button {
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-bottom: 0;
+}
+
+button[type="submit"] {
+    margin-top: 10px;
 }
 
 .error {

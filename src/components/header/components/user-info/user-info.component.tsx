@@ -15,7 +15,7 @@ const UserInfoComponent: FunctionComponent = (): ReactElement => {
     };
 
     return <div className="user-info-component">
-        <img src={user.avatar} alt="avatar"/>
+        <div className="avatar" style={{ background: `url(${user.avatar}) 50% 50% no-repeat` }} />
         <p className="name">{ user.name }</p>
         <p>{ user.email }</p>
         <button className="btn btn-block" onClick={logOut}>

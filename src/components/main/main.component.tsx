@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import './main.component.scss';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {IntlProvider} from 'react-intl';
 import {useDispatch, useSelector} from 'react-redux';
@@ -16,6 +17,8 @@ import { LOG_IN_ACTION } from 'store/auth/actions';
 import { showGrowlMessage } from 'components/shared/growl/services/growl.service';
 import GrowlMessageImp from 'model/growl-message.imp';
 import GrowlComponent from 'components/shared/growl/growl.component';
+import SignUpComponent from 'components/sign-up/sign-up.component';
+import MenuComponent from 'components/menu/menu.component';
 
 const MainComponent: FunctionComponent = (): ReactElement => {
 	const { language } = useSelector((state: MainState) => state.language);
@@ -25,31 +28,43 @@ const MainComponent: FunctionComponent = (): ReactElement => {
 	const [ dataLoaded, setDataLoaded ] = useState<boolean>(false);
 
 	useEffect(() => {
-		dispatch(SHOW_LOADING_ACTION);
+		if (localStorage.drive_copy_token) {
+			dispatch(SHOW_LOADING_ACTION);
 		
-		getUserData(localStorage.drive_copy_token)
+		getUserData()
 			.then((userInfo: User) => {
 				const logInAction = {...LOG_IN_ACTION};
 				logInAction.user = userInfo;
 				dispatch(logInAction);
 			})
-			.catch(() => showGrowlMessage(new GrowlMessageImp('user_info_load_error'), dispatch))
+			.catch(err => showGrowlMessage(new GrowlMessageImp(err.response.data.error || 'user_info_load_error'), dispatch))
 			.finally(() => {
 				setDataLoaded(true);
 				dispatch(HIDE_LOADING_ACTION);
 			});
+		} else {
+			setDataLoaded(true);
+		}
 	}, [dispatch]);
 
     return dataLoaded ? <IntlProvider locale={language.value} messages={Object.assign(i18n)[language.value]} onError={() => {}}>
 		<BrowserRouter>
 			<SpinnerComponent loading={loading} position="global" />
 			<GrowlComponent/>
-			{ user.email && <HeaderComponent/> }
-			<Switch>
-				<Route path={APP_CONSTANTS.ROUTES.LOG_IN} render={() => (!user.email ? <LogInComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.HOME}/>)}/>
-				<Route path={APP_CONSTANTS.ROUTES.HOME} render={() => (user.email ? <HomeComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.LOG_IN}/>)}/>
-				<Redirect to={APP_CONSTANTS.ROUTES.HOME}/>
-			</Switch>
+			<div className="main-component">
+				{ user.email && <HeaderComponent/> }
+				{ user.email && <div className="menu-container">
+					<MenuComponent/>
+				</div> }
+				<div className={user.email ? 'main-container' : 'full-width'}>
+					<Switch>
+						<Route path={APP_CONSTANTS.ROUTES.LOG_IN} render={() => (!user.email ? <LogInComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.HOME}/>)}/>
+						<Route path={APP_CONSTANTS.ROUTES.SIGN_UP} render={() => (!user.email ? <SignUpComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.HOME}/>)}/>
+						<Route path={APP_CONSTANTS.ROUTES.HOME} render={() => (user.email ? <HomeComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.LOG_IN}/>)}/>
+						<Redirect to={APP_CONSTANTS.ROUTES.HOME}/>
+					</Switch>
+				</div>
+			</div>
 		</BrowserRouter>
 	</IntlProvider> : <SpinnerComponent loading={true} position="global" />;
 }
