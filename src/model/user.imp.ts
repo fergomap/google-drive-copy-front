@@ -16,10 +16,14 @@ export default class UserImp implements User {
     @JsonProperty('token', String, true)
     token: string;
 
-    constructor(name: string = '', email: string = '', avatar: string = '', token: string = '') {
+    @JsonProperty('rootFolderId', String, true)
+    rootFolderId: string;
+
+    constructor(name: string = '', email: string = '', avatar: string = '', token: string = '', rootFolderId: string = '') {
         this.name = name;
         this.email = email;
         this.avatar = avatar;
         this.token = token;
+        this.rootFolderId = rootFolderId;
     }
 }

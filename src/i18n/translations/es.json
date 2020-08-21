@@ -1,6 +1,7 @@
 {
     "action_success": "Acción realizada correctamente",
     "loading_error": "Ha ocurrido un error, vuelva a intentarlo más tarde.",
+    "folder_load_error": "No se ha podido cargar la información de la carpeta, vuelva a intentarlo más tarde.",
     "user_info_load_error": "No se ha podido cargar la información del usuario, vuelva a intentarlo más tarde.",
     "search": "Buscar",
     "log_out": "Cerrar sesión",
@@ -25,6 +26,13 @@
     "go_back": "Volver",
     "drag_your_document": "Arrastra el documento o haz clic aquí",
     "home": "Incio",
+    "folders": "Carpetas",
     "documents": "Documentos",
-    "trash": "Papelera"
+    "trash": "Papelera",
+    "open": "Abrir",
+    "owner": "Propietario",
+    "can_edit": "Pueden editar",
+    "can_view": "Pueden ver",
+    "created": "Creado",
+    "edited": "Editado por última vez"
 }

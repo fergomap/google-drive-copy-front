@@ -4,23 +4,29 @@ import MainState from 'store/model/main.state';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { LOG_OUT_ACTION } from 'store/auth/actions';
+import User from 'model/user';
 
-const UserInfoComponent: FunctionComponent = (): ReactElement => {
+interface UserInfoComponentProps {
+    selectedUser?: User;
+}
+
+const UserInfoComponent: FunctionComponent<UserInfoComponentProps> = ({ selectedUser }): ReactElement => {
 	const { user } = useSelector((state: MainState) => state.auth);
     const dispatch = useDispatch();
+    const userInfo = selectedUser || user;
 
     const logOut = (): void => {
         localStorage.drive_copy_token = '';
         dispatch(LOG_OUT_ACTION);
     };
 
-    return <div className="user-info-component">
-        <div className="avatar" style={{ background: `url(${user.avatar}) 50% 50% no-repeat` }} />
-        <p className="name">{ user.name }</p>
-        <p>{ user.email }</p>
-        <button className="btn btn-block" onClick={logOut}>
+    return <div className={`user-info-component ${selectedUser && 'no-padding'}`} style={selectedUser ? {} : { minWidth: '200px' }}>
+        <img alt="user" src={userInfo.avatar} className={selectedUser && 'small-image'}/>
+        <p className="name">{ userInfo.name }</p>
+        <p>{ userInfo.email }</p>
+        { !selectedUser && <button className="btn btn-block" onClick={logOut}>
             <FormattedMessage id="log_out" />
-        </button>
+        </button> }
     </div>;
 }
 

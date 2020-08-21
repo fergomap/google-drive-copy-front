@@ -3,4 +3,5 @@ export default interface User {
     email: string;
     avatar: string;
     token: string;
+    rootFolderId: string;
 }

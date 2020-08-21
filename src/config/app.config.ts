@@ -10,6 +10,7 @@ interface AppConfig {
         LOG_IN: string;
         SIGN_UP: string;
         USER_INFO: string;
+        FOLDERS: string;
     };
 }
 
@@ -24,6 +25,7 @@ export const APP_CONSTANTS: AppConfig = {
     ENDPOINTS: {
         LOG_IN: `${process.env.REACT_APP_BASE_URL}/log-in`,
         SIGN_UP: `${process.env.REACT_APP_BASE_URL}/sign-up`,
-        USER_INFO: `${process.env.REACT_APP_BASE_URL}/user-info`
+        USER_INFO: `${process.env.REACT_APP_BASE_URL}/user-info`,
+        FOLDERS: `${process.env.REACT_APP_BASE_URL}/folders`
     }
 };

@@ -3,14 +3,18 @@
 .user-info-component {
     padding: 10px 20px;
     display: flex;
-    min-width: 200px;
     flex-direction: column;
     align-items: center;
 
-    .avatar {
+    img {
         height: 100px;
         width: 100px;
         border-radius: 50%;
+    }
+
+    .small-image {
+        height: 25px;
+        width: 25px;
     }
 
     p {

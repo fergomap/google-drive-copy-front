@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import 'bootstrap';
 
 input {
     border-radius: 3px;
@@ -9,6 +10,18 @@ input {
     &:focus {
         border-color: $primary;
     }
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.rc-tooltip {
+    opacity: 1 !important;
 }
 
 button {
