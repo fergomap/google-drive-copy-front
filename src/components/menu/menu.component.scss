@@ -15,16 +15,15 @@
     .menu-item {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 10px 20px;
         border-radius: 10px;
         color: darkslategray;
         text-decoration: none !important;
         font-weight: bold;
 
-        svg {
-            fill: darkslategray;
-            width: 32px;
-            height: 32px;
+        i {
+            color: darkslategray;
         }
 
         &:hover { 
@@ -35,8 +34,8 @@
             color: $primary;
             background-color: $primary-light;
 
-            svg {
-                fill: $primary;
+            i {
+                color: $primary;
             }
         }
     }

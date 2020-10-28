@@ -9,7 +9,7 @@ import { i18n } from 'i18n/i18n';
 import HeaderComponent from 'components/header/header.component';
 import { APP_CONSTANTS } from 'config/app.config';
 import LogInComponent from 'components/log-in/log-in.component';
-import HomeComponent from 'components/home/home.component';
+import FolderComponent from 'components/folder/folder.component';
 import { SHOW_LOADING_ACTION, HIDE_LOADING_ACTION } from 'store/loading/actions';
 import { getUserData } from 'services/auth.service';
 import User from 'model/user';
@@ -31,17 +31,17 @@ const MainComponent: FunctionComponent = (): ReactElement => {
 		if (localStorage.drive_copy_token) {
 			dispatch(SHOW_LOADING_ACTION);
 		
-		getUserData()
-			.then((userInfo: User) => {
-				const logInAction = {...LOG_IN_ACTION};
-				logInAction.user = userInfo;
-				dispatch(logInAction);
-			})
-			.catch(err => showGrowlMessage(new GrowlMessageImp(err.response.data.error || 'user_info_load_error'), dispatch))
-			.finally(() => {
-				setDataLoaded(true);
-				dispatch(HIDE_LOADING_ACTION);
-			});
+			getUserData()
+				.then((userInfo: User) => {
+					const logInAction = {...LOG_IN_ACTION};
+					logInAction.user = userInfo;
+					dispatch(logInAction);
+				})
+				.catch(err => showGrowlMessage(new GrowlMessageImp(err.response.data.error || 'user_info_load_error'), dispatch))
+				.finally(() => {
+					setDataLoaded(true);
+					dispatch(HIDE_LOADING_ACTION);
+				});
 		} else {
 			setDataLoaded(true);
 		}
@@ -60,7 +60,8 @@ const MainComponent: FunctionComponent = (): ReactElement => {
 					<Switch>
 						<Route path={APP_CONSTANTS.ROUTES.LOG_IN} render={() => (!user.email ? <LogInComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.HOME}/>)}/>
 						<Route path={APP_CONSTANTS.ROUTES.SIGN_UP} render={() => (!user.email ? <SignUpComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.HOME}/>)}/>
-						<Route path={APP_CONSTANTS.ROUTES.HOME} render={() => (user.email ? <HomeComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.LOG_IN}/>)}/>
+						<Route path={APP_CONSTANTS.ROUTES.FOLDER_PARAMS} render={() => (user.email ? <FolderComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.LOG_IN}/>)}/>
+						<Route path={APP_CONSTANTS.ROUTES.HOME} render={() => (user.email ? <FolderComponent/> : <Redirect to={APP_CONSTANTS.ROUTES.LOG_IN}/>)}/>
 						<Redirect to={APP_CONSTANTS.ROUTES.HOME}/>
 					</Switch>
 				</div>

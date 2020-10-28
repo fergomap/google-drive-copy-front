@@ -17,7 +17,7 @@ const MenuComponent: FunctionComponent = (): ReactElement => {
             <h6>{ user.email }</h6>
         </div>
         { MENU_CONSTANTS.LINKS.map((link: MenuLink, index: number) => {
-            return <Link key={index} className={`menu-item ${pathname === link.route && 'active'}`} to={link.route}>
+            return <Link key={index} className={`menu-item ${pathname.includes(link.route) && 'active'}`} to={link.route}>
                 { link.icon }
                 <FormattedMessage id={link.label}/>
             </Link>;

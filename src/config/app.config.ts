@@ -3,7 +3,9 @@ interface AppConfig {
         LOG_IN: string;
         SIGN_UP: string;
         HOME: string;
-        DOCUMENTS: string;
+        FOLDER: string;
+        FOLDER_PARAMS: string;
+        FAVOURITES: string;
         TRASH: string;
     };
     ENDPOINTS: {
@@ -19,7 +21,9 @@ export const APP_CONSTANTS: AppConfig = {
         LOG_IN: '/log-in',
         SIGN_UP: '/sign-up',
         HOME: '/home',
-        DOCUMENTS: '/documents',
+        FOLDER: '/home/folder',
+        FOLDER_PARAMS: '/home/folder/:id',
+        FAVOURITES: '/favourites',
         TRASH: '/trash'
     },
     ENDPOINTS: {
