@@ -1,8 +1,10 @@
 {
     "action_success": "Acción realizada correctamente",
     "loading_error": "Ha ocurrido un error, vuelva a intentarlo más tarde.",
-    "folder_load_error": "No se ha podido cargar la información de la carpeta, vuelva a intentarlo más tarde.",
     "user_info_load_error": "No se ha podido cargar la información del usuario, vuelva a intentarlo más tarde.",
+    "folder_load_error": "No se ha podido cargar la información de la carpeta, vuelva a intentarlo más tarde.",
+    "folder_update_error": "No se ha podido actualizar la carpeta, vuelva a intentarlo más tarde.",
+    "folder_create_error": "No se ha podido crear la carpeta, vuelva a intentarlo más tarde.",
     "search": "Buscar",
     "log_out": "Cerrar sesión",
     "log_in": "Iniciar sesión",
@@ -35,5 +37,11 @@
     "can_view": "Pueden ver",
     "created": "Creado",
     "edited": "Editado por última vez",
-    "favourites": "Favoritos"
+    "favourites": "Favoritos",
+    "edit_folder": "Editar carpeta",
+    "edit": "Editar",
+    "create_folder": "Crear carpeta",
+    "create": "Crear",
+    "new_folder": "Nueva carpeta",
+    "new_document": "Nuevo documento"
 }

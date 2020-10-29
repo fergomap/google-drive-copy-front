@@ -3,6 +3,8 @@
     "loading_error": "An error happened, try again later.",
     "user_info_load_error": "The user info could not be loaded, try again later.",
     "folder_load_error": "The folder info could not be loaded, try again later.",
+    "folder_update_error": "The folder info could not be updated, try again later.",
+    "folder_create_error": "The folder info could not be created, try again later.",
     "search": "Search",
     "log_out": "Log out",
     "log_in": "Log in",
@@ -35,5 +37,11 @@
     "can_view": "Viewers",
     "created": "Created",
     "edited": "Last edited",
-    "favourites": "Favourites"
+    "favourites": "Favourites",
+    "edit_folder": "Edit folder",
+    "edit": "Edit",
+    "create_folder": "Create folder",
+    "create": "Create",
+    "new_folder": "New folder",
+    "new_document": "New document"
 }

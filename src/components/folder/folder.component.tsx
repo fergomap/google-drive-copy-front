@@ -16,15 +16,20 @@ import User from 'model/user';
 import { getFileTypeIcon } from 'services/file-type.service';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import { APP_CONSTANTS } from 'config/app.config';
+import { openModal } from 'services/utils.service';
+import EditFolderComponent from 'components/modals/edit-folder/edit-folder.component';
+import { SET_CURRENT_FOLDER_ACTION } from 'store/folder/actions';
 
 const FolderComponent: FunctionComponent = (): ReactElement => {
+    const { currentFolder } = useSelector((state: MainState) => state.folder);
     const { user } = useSelector((state: MainState) => state.auth);
     const { formatDateTime } = useSelector((state: MainState) => state.language.language);
     const dispatch = useDispatch();
     const { id } = useParams();
     const { push } = useHistory();
-    const [ rootFolder, setRootFolder ] = useState<Folder>(new FolderImp());
     const [ selectedFolder, setSelectedFolder ] = useState<Folder>(new FolderImp());
+    const [ showFolderSettingsBar, setShowFolderSettingsBar ] = useState<boolean>(false);
+    const [ showDocumentSettingsBar, setShowDocumentSettingsBar ] = useState<boolean>(false);
     const [ showFolderDetail, setShowFolderDetail ] = useState<boolean>(false);
     const [ selectedDocument, setSelectedDocument ] = useState<Document>(new DocumentImp());
     const [ showDocumentDetail, setShowDocumentDetail ] = useState<boolean>(false);
@@ -33,44 +38,55 @@ const FolderComponent: FunctionComponent = (): ReactElement => {
         dispatch(SHOW_LOADING_ACTION);
 
         getFolder(id || user.rootFolderId)
-            .then((f: Folder) => setRootFolder(f))
+            .then((f: Folder) => {
+                const setCurrentFolderAction = {...SET_CURRENT_FOLDER_ACTION};
+                setCurrentFolderAction.folder = f;
+                dispatch(setCurrentFolderAction);
+            })
             .catch(err => showGrowlMessage(new GrowlMessageImp(err.response.data.error || 'folder_load_error'), dispatch))
             .finally(() => dispatch(HIDE_LOADING_ACTION
         ));
     }, [dispatch, id, user.rootFolderId]);
 
     const selectFolder = (folder: Folder): void => {
-        setShowDocumentDetail(false);
-        setSelectedDocument(new DocumentImp());
         setSelectedFolder(folder);
-        setShowFolderDetail(true);
+        setShowFolderSettingsBar(true);
+        setShowDocumentSettingsBar(false);
     };
 
     const selectDocument = (document: Document): void => {
-        setShowFolderDetail(false);
-        setSelectedFolder(new FolderImp());
         setSelectedDocument(document);
-        setShowDocumentDetail(true);
+        setShowFolderSettingsBar(false);
+        setShowDocumentSettingsBar(true);
     };
 
     const openFolder = (folderId: string): void => {
         setShowFolderDetail(false);
+        setShowFolderSettingsBar(false);
         push(`${APP_CONSTANTS.ROUTES.FOLDER}/${folderId}`);
     };
 
     return <div className="folder-component">
         <ol className="breadcrumb">
-            <li className="breadcrumb-item active">{ rootFolder.name }</li>
+            <li className="breadcrumb-item active">{ currentFolder.name }</li>
         </ol>
+        { showFolderSettingsBar && <div className="settings-bar">
+            <i className="fas fa-pen" onClick={() => openModal(dispatch, <EditFolderComponent folder={selectedFolder}/>)}/>
+            <span className="info" onClick={() => setShowFolderDetail(true)}>i</span>
+        </div> }
+        { showDocumentSettingsBar && <div className="settings-bar">
+            <i className="fas fa-pen"/>
+            <span className="info" onClick={() => setShowDocumentDetail(true)}>i</span>
+        </div> }
         <div className="folder-container">
             <div className="container">
                 <div className="row">
                     <div className="col-12 folder-title">
                         <h4 className="no-margin"><FormattedMessage id="folders"/></h4>
                     </div>
-                    { rootFolder.folders.map((f: Folder, index: number) => {
+                    { currentFolder.folders.map((f: Folder, index: number) => {
                         return <div key={index} className="col-sm-12 col-md-3">
-                            <div className="card" onClick={() => selectFolder(f)} onDoubleClick={() => openFolder(f.id)}>
+                            <div className={`card ${f === selectedFolder && showFolderSettingsBar && 'selected'}`} onClick={() => selectFolder(f)} onDoubleClick={() => openFolder(f.id)}>
                                 <div className="card-body">
                                     <i className="fas fa-folder"/>
                                     <h6 className="card-title">{ f.name }</h6>
@@ -81,9 +97,9 @@ const FolderComponent: FunctionComponent = (): ReactElement => {
                     <div className="col-12 folder-title">
                         <h4 className="no-margin"><FormattedMessage id="documents"/></h4>
                     </div>
-                        { rootFolder.documents.map((d: Document, index: number) => {
+                        { currentFolder.documents.map((d: Document, index: number) => {
                             return <div key={index} className="col-sm-12 col-md-3">
-                                <div className="card" onClick={() => selectDocument(d)}>
+                                <div className={`card ${d === selectedDocument && showDocumentSettingsBar && 'selected'}`} onClick={() => selectDocument(d)}>
                                     <div className="card-body">
                                         { getFileTypeIcon(d.type) }
                                         <h6 className="card-title">{ d.name }</h6>
@@ -99,10 +115,7 @@ const FolderComponent: FunctionComponent = (): ReactElement => {
                         <i className="fas fa-folder"/>
                         <h4>{ selectedFolder.name }</h4>
                     </div>
-                    <div>
-                        <i className="fa fa-pen" onClick={() => setShowFolderDetail(false)}/>
-                        <i className="fas fa-times" onClick={() => setShowFolderDetail(false)}/>
-                    </div>
+                    <i className="fas fa-times" onClick={() => setShowFolderDetail(false)}/>
                 </div>
                 <p className="label"><FormattedMessage id="owner"/>:</p>
                 <UserLabelComponent user={user}/>

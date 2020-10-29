@@ -28,13 +28,14 @@ const DragAndDropComponent: FunctionComponent<DragAndDropComponentProps> = ({fil
 
 	const removeFile = (): void => {
 		setValueFile(null);
-		control.setValue('file', undefined);
+		control.setValue('file', null);
 	};
 
 	return <div className={`form-group ${errors.file && 'error'}`}>
 		<label className="form-group__label"><FormattedMessage id={label}/></label>
 		<div className={`drag-and-drop-component ${valueFile ? 'height__addon' : ''}`}>
 			<Controller
+				defaultValue={null}
 				control={control}
 				name="file"
 				rules={{required: 'required_field'}}
@@ -52,7 +53,7 @@ const DragAndDropComponent: FunctionComponent<DragAndDropComponentProps> = ({fil
                     <span className="attachment__file u-text--secondary">
                         { valueFile?.name }
                     </span>
-                    <i className="fas fa-times" onClick={removeFile}/>
+                    <i className="fas fa-times remove-icon" onClick={removeFile}/>
 				</div> : <div className="drag-and-drop-component-content--wrapper">
                     <i className="fas fa-cloud"/>
                     <br/>

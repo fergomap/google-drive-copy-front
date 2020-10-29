@@ -1,4 +1,6 @@
-import { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from 'axios';
+import { ReactElement } from 'react';
+import { SHOW_MODAL_ACTION } from 'store/modal/actions';
 
 export const getAxiosHeader = (token?: string): AxiosRequestConfig => ({
     headers: {
@@ -16,3 +18,9 @@ export const toBase64 = (file: File | string) => new Promise<string>((resolve: F
 		reader.onerror = error => reject(error);
 	}
 });
+
+export const openModal = (dispatch: Function, component: ReactElement): void => {
+	const showModalAction = {...SHOW_MODAL_ACTION};
+	showModalAction.content = component;
+	dispatch(showModalAction);
+};

@@ -19,6 +19,7 @@ import GrowlMessageImp from 'model/growl-message.imp';
 import GrowlComponent from 'components/shared/growl/growl.component';
 import SignUpComponent from 'components/sign-up/sign-up.component';
 import MenuComponent from 'components/menu/menu.component';
+import ModalComponent from 'components/shared/modal/modal.component';
 
 const MainComponent: FunctionComponent = (): ReactElement => {
 	const { language } = useSelector((state: MainState) => state.language);
@@ -51,6 +52,7 @@ const MainComponent: FunctionComponent = (): ReactElement => {
 		<BrowserRouter>
 			<SpinnerComponent loading={loading} position="global" />
 			<GrowlComponent/>
+			<ModalComponent/>
 			<div className="main-component">
 				{ user.email && <HeaderComponent/> }
 				{ user.email && <div className="menu-container">

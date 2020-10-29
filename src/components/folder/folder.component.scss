@@ -3,6 +3,34 @@
 .folder-component {
     .breadcrumb {
         border-radius: 0;
+        margin-bottom: 0;
+    }
+
+    .settings-bar {
+        padding: 1rem;
+        border-bottom: solid 1px $light-gray;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        color: darkgray;
+
+        i {
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .info {
+            cursor: pointer;
+            border: solid 2px darkgray;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 5px;
+        }
     }
 
     .folder-container {
@@ -22,6 +50,15 @@
 
         .card {
             cursor: pointer;
+
+            &.selected {
+                border-color: $primary;
+                background-color: $primary-light;
+
+                .card-title {
+                    color: $primary !important;
+                }
+            }
 
             .card-body {
                 padding: 10px;
@@ -44,7 +81,7 @@
 
         .detail {
             width: 40%;
-            padding: 0 15px;
+            padding: 15px;
             border-left: solid 0.5px #e9ecef;
 
             a {

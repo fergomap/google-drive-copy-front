@@ -11,6 +11,25 @@
             color: $primary;
         }
     }
+    
+    .menu-buttons {
+        padding: 0 20px;
+        padding-top: 0;
+
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            border: none;
+            padding: 10px 5px;
+            background-color: $primary-light;
+            color: $primary;
+
+            i {
+                margin-right: 10px;
+            }
+        }
+    }
 
     .menu-item {
         display: flex;
